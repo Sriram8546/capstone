@@ -48,13 +48,17 @@ jobs:
           path: shoes-store1/demo/allure-report
           if-no-files-found: warn
 
-      - name: Deploy Allure report to GitHub Pages
+      - name: Configure GitHub Pages
+        if: always()
+        uses: actions/configure-pages@v4
+
+      - name: Upload Allure report to GitHub Pages
         if: always()
         uses: actions/upload-pages-artifact@v3
         with:
           path: shoes-store1/demo/allure-report
 
-      - name: Deploy to Pages
+      - name: Deploy to GitHub Pages
         if: always()
         id: deployment
         uses: actions/deploy-pages@v4
