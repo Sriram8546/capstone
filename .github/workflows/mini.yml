@@ -6,11 +6,16 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   test-and-publish-allure:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout code
@@ -74,10 +79,17 @@ jobs:
           path: shoes-store1/demo/allure-report
           if-no-files-found: warn
 
-      - name: Deploy Allure report to gh-pages
+      - name: Setup Pages
         if: always() && steps.detect_allure.outputs.has_results == 'true'
-        uses: peaceiris/actions-gh-pages@v4
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: always() && steps.detect_allure.outputs.has_results == 'true'
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: shoes-store1/demo/allure-report
-          force_orphan: true
+          path: shoes-store1/demo/allure-report
+
+      - name: Deploy to GitHub Pages
+        if: always() && steps.detect_allure.outputs.has_results == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4
