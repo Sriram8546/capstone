@@ -34,8 +34,9 @@ public class BaseTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        // open app
-        driver.get("http://localhost:3000/");
+        // open app; override with -DbaseUrl=... in CI if needed
+        String baseUrl = System.getProperty("baseUrl", "http://localhost:3000/");
+        driver.get(baseUrl);
     }
 
     public WebDriver getDriver() {
