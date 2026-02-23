@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shoes Store - Browse our premium collection of running, casual, and sports footwear">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Home | Shoes Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar" role="navigation">
+    <a href="home.html" class="nav-logo">KICKS</a>
+    <div class="nav-links">
+      <a href="home.html" class="nav-link active">Home</a>
+      <a href="cart.html" class="nav-link">Cart <span id="cart-count" class="badge">0</span></a>
+      <a href="orders.html" class="nav-link">Orders</a>
+      <a href="#" id="logout-btn" class="nav-link">Logout</a>
+    </div>
+    <div class="nav-search">
+      <input type="search" id="search-input" placeholder="Search shoes..." aria-label="Search shoes" autocomplete="off">
+    </div>
+  </nav>
+  <main class="main-content">
+    <section class="hero">
+      <h1>Step Into Style</h1>
+      <p>Discover premium footwear for every occasion</p>
+    </section>
+    <section class="shoes-grid" id="shoes-grid" role="list">
+      <!-- Shoe cards rendered by JS -->
+    </section>
+    <div id="no-results" class="no-results hidden">No shoes found. Try a different search.</div>
+  </main>
+  <script src="data.js" defer></script>
+  <script src="auth.js" defer></script>
+  <script src="home.js" defer></script>
+</body>
+</html>

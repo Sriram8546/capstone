@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shoes Store - View shoe details and add to cart">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Shoe Details | Shoes Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar" role="navigation">
+    <a href="home.html" class="nav-logo">KICKS</a>
+    <div class="nav-links">
+      <a href="home.html" class="nav-link">Home</a>
+      <a href="cart.html" class="nav-link">Cart <span id="cart-count" class="badge">0</span></a>
+      <a href="orders.html" class="nav-link">Orders</a>
+      <a href="#" id="logout-btn" class="nav-link">Logout</a>
+    </div>
+  </nav>
+  <main class="main-content detail-page">
+    <div id="shoe-detail" class="shoe-detail">
+      <!-- Content rendered by JS -->
+    </div>
+  </main>
+  <script src="data.js" defer></script>
+  <script src="auth.js" defer></script>
+  <script src="shoe-detail.js" defer></script>
+</body>
+</html>

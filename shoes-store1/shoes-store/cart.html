@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shoes Store - Your shopping cart">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Cart | Shoes Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar" role="navigation">
+    <a href="home.html" class="nav-logo">KICKS</a>
+    <div class="nav-links">
+      <a href="home.html" class="nav-link">Home</a>
+      <a href="cart.html" class="nav-link active">Cart <span id="cart-count" class="badge">0</span></a>
+      <a href="orders.html" class="nav-link">Orders</a>
+      <a href="#" id="logout-btn" class="nav-link">Logout</a>
+    </div>
+  </nav>
+  <main class="main-content cart-page">
+    <h1>Your Cart</h1>
+    <div id="cart-items" class="cart-items">
+      <!-- Cart items rendered by JS -->
+    </div>
+    <div id="cart-empty" class="cart-empty hidden">
+      <p>Your cart is empty.</p>
+      <a href="home.html" class="btn-primary">Browse Shoes</a>
+    </div>
+    <div id="cart-summary" class="cart-summary hidden">
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="subtotal">$0</span>
+      </div>
+      <div class="summary-row total">
+        <span>Grand Total</span>
+        <span id="grand-total">$0</span>
+      </div>
+      <a href="payment.html" class="btn-primary btn-checkout" id="checkout-btn">Proceed to Checkout</a>
+    </div>
+  </main>
+  <script src="data.js" defer></script>
+  <script src="auth.js" defer></script>
+  <script src="cart.js" defer></script>
+</body>
+</html>
