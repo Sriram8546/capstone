@@ -1,0 +1,63 @@
+name: Mini Project CI with Allure
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test-and-publish-allure:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '11'
+          cache: maven
+
+      - name: Start web app on port 3000
+        run: |
+          python3 -m http.server 3000 --directory shoes-store > server.log 2>&1 &
+          for i in {1..30}; do
+            if curl -sSf http://localhost:3000/index.html > /dev/null; then
+              echo "Web app is up"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Web app did not start in time"
+          cat server.log || true
+          exit 1
+
+      - name: Run TestNG tests (headless)
+        run: mvn -B -ntp test -Dheadless=true
+        working-directory: demo
+
+      - name: Generate Allure report
+        if: always()
+        run: mvn -B -ntp allure:report
+        working-directory: demo
+
+      - name: Upload Allure artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: demo/target/site/allure-maven-plugin
+          if-no-files-found: warn
+
+      - name: Deploy Allure report to gh-pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: demo/target/site/allure-maven-plugin
+          force_orphan: true
