@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,7 +23,7 @@ public abstract class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.baseUrl = Config.BASE_URL;
+        this.baseUrl = System.getProperty("baseUrl", Config.BASE_URL);
     }
 
     // open any page
@@ -57,6 +59,17 @@ public abstract class BasePage {
     protected boolean hasClass(WebElement el, String className) {
         return el.getAttribute("class") != null &&
                el.getAttribute("class").contains(className);
+    }
+
+    protected void click(By locator) {
+        WebElement el = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(locator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", el);
+        try {
+            el.click();
+        } catch (ElementClickInterceptedException ex) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", el);
+        }
     }
 }
 // package com.example.pages;

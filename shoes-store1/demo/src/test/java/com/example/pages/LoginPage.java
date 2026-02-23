@@ -28,11 +28,11 @@ public class LoginPage extends BasePage {
     }
 
     public void switchToSignUp() {
-        driver.findElement(TOGGLE_SIGNUP).click();
+        click(TOGGLE_SIGNUP);
     }
 
     public void switchToLogin() {
-        driver.findElement(TOGGLE_LOGIN).click();
+        click(TOGGLE_LOGIN);
     }
 
     public void enterEmail(String email) {
@@ -52,7 +52,7 @@ public class LoginPage extends BasePage {
     }
 
     public void clickSubmit() {
-        driver.findElement(AUTH_SUBMIT).click();
+        click(AUTH_SUBMIT);
     }
 
     public void login(String email, String password) {
