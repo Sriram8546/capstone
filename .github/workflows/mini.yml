@@ -45,24 +45,29 @@ jobs:
         if: always()
         run: npm install -g allure-commandline --no-fund --no-audit
 
-      - name: Generate Allure report
+      - name: Detect Allure results path
         if: always()
         run: |
           if [ -d "allure-results" ] && ls allure-results/*-result.json >/dev/null 2>&1; then
-            echo "Using allure-results/"
-            allure generate allure-results --clean -o allure-report
+            echo "results_path=allure-results" >> "$GITHUB_OUTPUT"
+            echo "has_results=true" >> "$GITHUB_OUTPUT"
           elif [ -d "target/allure-results" ] && ls target/allure-results/*-result.json >/dev/null 2>&1; then
-            echo "Using target/allure-results/"
-            allure generate target/allure-results --clean -o allure-report
+            echo "results_path=target/allure-results" >> "$GITHUB_OUTPUT"
+            echo "has_results=true" >> "$GITHUB_OUTPUT"
           else
-            echo "No Allure result files found. Creating empty report."
-            mkdir -p allure-results
-            allure generate allure-results --clean -o allure-report
+            echo "No Allure result files found. Skipping report generation and deploy."
+            echo "has_results=false" >> "$GITHUB_OUTPUT"
           fi
+        working-directory: shoes-store1/demo
+        id: detect_allure
+
+      - name: Generate Allure report
+        if: always() && steps.detect_allure.outputs.has_results == 'true'
+        run: allure generate ${{ steps.detect_allure.outputs.results_path }} --clean -o allure-report
         working-directory: shoes-store1/demo
 
       - name: Upload Allure report artifact
-        if: always()
+        if: always() && steps.detect_allure.outputs.has_results == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
@@ -70,7 +75,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Deploy Allure report to gh-pages
-        if: always()
+        if: always() && steps.detect_allure.outputs.has_results == 'true'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
