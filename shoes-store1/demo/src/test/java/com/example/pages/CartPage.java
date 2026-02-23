@@ -47,7 +47,7 @@ public class CartPage extends BasePage {
     }
 
     public void clickCheckout() {
-        driver.findElement(CHECKOUT_BTN).click();
+        click(CHECKOUT_BTN);
     }
 
     public String getCartBadgeCount() {
@@ -55,7 +55,7 @@ public class CartPage extends BasePage {
     }
 
     public void clickBrowseShoes() {
-        driver.findElement(BROWSE_SHOES_LINK).click();
+        click(BROWSE_SHOES_LINK);
     }
 
     public boolean isCheckoutButtonDisplayed() {

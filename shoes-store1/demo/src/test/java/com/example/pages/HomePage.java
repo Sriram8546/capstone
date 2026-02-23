@@ -45,7 +45,7 @@ public class HomePage extends BasePage {
     }
 
     public void clickViewDetails(int index) {
-        driver.findElements(VIEW_DETAILS_LINKS).get(index).click();
+        click(driver.findElements(VIEW_DETAILS_LINKS).get(index));
     }
 
     public String getFirstShoeTitle() {
@@ -63,11 +63,11 @@ public class HomePage extends BasePage {
     }
 
     public void clickCart() {
-        driver.findElement(CART_LINK).click();
+        click(CART_LINK);
     }
 
     public void clickLogout() {
-        driver.findElement(LOGOUT_BTN).click();
+        click(LOGOUT_BTN);
     }
 
     public boolean isHomePage() {

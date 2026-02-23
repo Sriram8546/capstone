@@ -42,11 +42,11 @@ public class CheckoutPage extends BasePage {
     }
 
     public void selectCard() {
-        driver.findElement(CARD_TAB).click();
+        click(CARD_TAB);
     }
 
     public void selectUpi() {
-        driver.findElement(UPI_TAB).click();
+        click(UPI_TAB);
     }
 
     public void enterCardNumber(String number) {
@@ -70,7 +70,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public void clickPayNow() {
-        driver.findElement(PAY_BTN).click();
+        click(PAY_BTN);
     }
 
     public String getPaymentTotal() {

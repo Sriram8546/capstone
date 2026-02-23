@@ -64,6 +64,10 @@ public abstract class BasePage {
     protected void click(By locator) {
         WebElement el = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(locator));
+        click(el);
+    }
+
+    protected void click(WebElement el) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", el);
         try {
             el.click();

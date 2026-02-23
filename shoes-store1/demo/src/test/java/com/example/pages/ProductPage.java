@@ -25,7 +25,7 @@ public class ProductPage extends BasePage {
 
     public void clickAddToCart() {
         waitFor(ADD_TO_CART_BTN);
-        driver.findElement(ADD_TO_CART_BTN).click();
+        click(ADD_TO_CART_BTN);
     }
 
     public boolean isAddToCartDisplayed() {
@@ -45,7 +45,7 @@ public class ProductPage extends BasePage {
     }
 
     public void clickBackToHome() {
-        driver.findElement(BACK_LINK).click();
+        click(BACK_LINK);
     }
 
     public boolean isProductDetailLoaded() {

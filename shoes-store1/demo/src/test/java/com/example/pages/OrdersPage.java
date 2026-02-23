@@ -30,7 +30,7 @@ public class OrdersPage extends BasePage {
     }
 
     public void clickStartShopping() {
-        driver.findElement(START_SHOPPING_LINK).click();
+        click(START_SHOPPING_LINK);
     }
 
     public List<WebElement> getOrderElements() {
